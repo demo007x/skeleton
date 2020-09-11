@@ -89,7 +89,6 @@ class Token extends Model implements CacheInterface
     public function verify(string $token): bool
     {
         $token = self::query()->where('token', $token)->first();
-
         if (! $token) {
             return false;
         }

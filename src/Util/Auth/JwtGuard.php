@@ -86,6 +86,7 @@ class JwtGuard implements AuthGuard
         $token = $token ?? $this->parseToken();
         // 验证缓存中的token
         $result = $this->cache->verify($token);
+
         if (! $result) {
             return null;
         }

@@ -14,14 +14,27 @@ namespace Bclfp\Skeleton\Controller\Backend;
 use Bclfp\Skeleton\Controller\AbstractController;
 use Bclfp\Skeleton\Model\Administrator;
 use Bclfp\Skeleton\Service\AdministratorService;
+use Bclfp\Skeleton\Middleware\AdminAuthMiddleware;
+use Bclfp\Skeleton\Middleware\PermissionMiddleware;
 use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpServer\Annotation\Middleware;
+use Hyperf\HttpServer\Annotation\Middlewares;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\GetMapping;
+use Hyperf\HttpServer\Annotation\PostMapping;
+use Hyperf\HttpServer\Annotation\PutMapping;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 
 /**
  * Class AdministratorController.
+ * @Controller(prefix="backend/administrator")
+ * @Middlewares({
+ *    @Middleware(AdminAuthMiddleware::class),
+ *    @Middleware(PermissionMiddleware::class)}
+ * )
  */
 class AdministratorController extends AbstractController
 {
@@ -38,53 +51,10 @@ class AdministratorController extends AbstractController
     protected $administratorService;
 
     /**
+     * logout
+     * @param RequestInterface $request
+     * @PostMapping(path="/backend/logout")
      * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function login(RequestInterface $request)
-    {
-        try {
-            $validation = $this->validationFactory->make(
-                $request->all(),
-                [
-                    'email' => 'required',
-                    'password' => 'required',
-                ],
-                [
-                    'email.*' => '邮箱不能为空',
-                    'password.*' => '密码不能为空',
-                ]
-            );
-            if ($validation->fails()) {
-                $message = $validation->errors()->first();
-                throw new \Exception($message);
-            }
-
-            $administrator = Administrator::query()
-                ->where('email', $request->post('email'))
-                ->where('status', '!=', Administrator::FORBID_STATUS)
-                ->first();
-            if (! $administrator) {
-                throw new \Exception('邮箱或者密码错误');
-            }
-            if (! password_verify($request->post('password'), $administrator->password)) {
-                throw new \Exception('邮箱或者密码错误');
-            }
-
-            // 更新登录时间
-            $administrator->login_at = Carbon::now()->format('Y-m-d H:i:s');
-            $administrator->save();
-            $adminAuth = adminAuth();
-            return successResponse([
-                'token' => $adminAuth->token($administrator),
-                'user' => $administrator,
-            ]);
-        } catch (\Throwable $exception) {
-            return errorResponse($exception);
-        }
-    }
-
-    /**
-     * 退出登录.
      */
     public function logout(RequestInterface $request)
     {
@@ -98,6 +68,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 列表.
+     * @GetMapping(path="list")
      * @return \Psr\Http\Message\RequestInterface|\Psr\Http\Message\ResponseInterface
      */
     public function list(RequestInterface $request, ResponseInterface $response)
@@ -130,7 +101,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 获取当前管理员的信息.
-     *
+     * @GetMapping(path="/backend/administrator")
      * @return \Psr\Http\Message\RequestInterface|\Psr\Http\Message\ResponseInterface
      */
     public function getCurrentAdministratorInfo(RequestInterface $request)
@@ -152,6 +123,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 获取管理员的信息.
+     * @GetMapping(path="{id}")
      */
     public function getAdministratorInfo(RequestInterface $request, int $id)
     {
@@ -168,7 +140,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 创建管理员.
-     *
+     * @PostMapping()
      * @return \Psr\Http\Message\RequestInterface|\Psr\Http\Message\ResponseInterface
      */
     public function create(RequestInterface $request)
@@ -205,7 +177,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 修改管理员信息.
-     *
+     * @PutMapping(path="{id:\d+}")
      * @return \Psr\Http\Message\RequestInterface|\Psr\Http\Message\ResponseInterface
      */
     public function update(RequestInterface $request, int $id)
@@ -220,7 +192,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 修改管理员密码
-     *
+     * @PutMapping(path="{id:\d+}/password")
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function updatePassword(RequestInterface $request, int $id)
@@ -257,7 +229,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 封禁用户.
-     *
+     * @GetMapping(path="{id:\d+}/forbid")
      * @return \Psr\Http\Message\RequestInterface|\Psr\Http\Message\ResponseInterface
      */
     public function forbid(RequestInterface $request, int $id)
@@ -285,7 +257,11 @@ class AdministratorController extends AbstractController
     }
 
     /**
-     * 删除用户.
+     * 删除用户
+     * @param RequestInterface $request
+     * @param int $id
+     * @GetMapping(path="{id:\d+}/destroy")
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function destroy(RequestInterface $request, int $id)
     {
@@ -307,7 +283,7 @@ class AdministratorController extends AbstractController
 
     /**
      * 设置管理员的角色.
-     *
+     * @PostMapping(path="role")
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function setAdminRole(RequestInterface $request)
