@@ -4,7 +4,11 @@
     "license": "MIT",
     "keywords": [
         "php",
-        "hyperf"
+        "hyperf",
+        "swoole",
+        "auth",
+        "skeleton",
+        "jwt-token"
     ],
     "description": "",
     "autoload": {
@@ -23,8 +27,25 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.5",
-        "hyperf/framework": "2.0.*",
-        "hyperf/di": "2.0.*"
+        "hyperf/cache": "~2.0.0",
+        "hyperf/command": "~2.0.0",
+        "hyperf/config": "~2.0.0",
+        "hyperf/framework": "~2.0.0",
+        "hyperf/guzzle": "~2.0.0",
+        "hyperf/http-server": "~2.0.0",
+        "hyperf/logger": "~2.0.0",
+        "hyperf/memory": "~2.0.0",
+        "hyperf/process": "~2.0.0",
+        "hyperf/redis": "~2.0.0",
+        "hyperf/async-queue": "~2.0.0",
+        "hyperf/amqp": "~2.0.0",
+        "hyperf/model-cache": "~2.0.0",
+        "hyperf/elasticsearch": "~2.0.0",
+        "hyperf/di": "^2.0",
+        "hyperf/http-message": "^2.0",
+        "hyperf/validation": "^2.0",
+        "firebase/php-jwt": "^5.2",
+        "ext-json": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
