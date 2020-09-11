@@ -30,7 +30,7 @@ use Hyperf\HttpServer\Annotation\PutMapping;
  * @Controller(prefix="backend/menu")
  * @Middlewares({
  *     @Middleware(AdminAuthMiddleware::class),
- *     @Middleware(\App\Middleware\PermissionMiddleware::class)
+ *     @Middleware(\Bclfp\Skeleton\Middleware\PermissionMiddleware::class)
  * })
  */
 class MenuController extends AbstractController

@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace Bclfp\Skeleton\Middleware;
 
-use App\Util\ExceptionCode;
+use Bclfp\Skeleton\Util\ExceptionCode;
 use Hyperf\HttpMessage\Server\Response;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Container\ContainerInterface;

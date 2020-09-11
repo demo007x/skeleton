@@ -32,7 +32,7 @@ use Hyperf\HttpServer\Contract\ResponseInterface;
  * @Controller(prefix="backend/permission")
  * @Middlewares({
  *     @Middleware(AdminAuthMiddleware::class),
- *     @Middleware(\App\Middleware\PermissionMiddleware::class)
+ *     @Middleware(\Bclfp\Skeleton\Middleware\PermissionMiddleware::class)
  * })
  */
 class PermissionController extends AbstractController

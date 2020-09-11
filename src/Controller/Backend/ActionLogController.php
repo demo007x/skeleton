@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Bclfp\Skeleton\Controller\Backend;
 
-use App\Controller\AbstractController;
-use App\Model\ActionLog;
+use Bclfp\Skeleton\Controller\AbstractController;
+use Bclfp\Skeleton\Model\ActionLog;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\Middlewares;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
-use App\Middleware\AdminAuthMiddleware;
-use App\Middleware\PermissionMiddleware;
+use Bclfp\Skeleton\Middleware\AdminAuthMiddleware;
+use Bclfp\Skeleton\Middleware\PermissionMiddleware;
 
 /**
  * Class ActionLogController
- * @package App\Controller\Backend
+ * @package Bclfp\Skeleton\Controller\Backend
  * @Controller(prefix="backend/log")
  * @Middlewares({
  *      @Middleware(AdminAuthMiddleware::class),

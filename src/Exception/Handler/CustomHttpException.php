@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace Bclfp\Skeleton\Exception\Handler;
 
-use App\Util\ExceptionCode;
+use Bclfp\Skeleton\Util\ExceptionCode;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Exception\HttpException;
 use Hyperf\HttpMessage\Exception\MethodNotAllowedHttpException;

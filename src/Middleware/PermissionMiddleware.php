@@ -11,9 +11,9 @@ declare(strict_types=1);
  */
 namespace Bclfp\Skeleton\Middleware;
 
-use App\Event\ActionLog;
-use App\Service\ActionLogService;
-use App\Util\ExceptionCode;
+use Bclfp\Skeleton\Event\ActionLog;
+use Bclfp\Skeleton\Service\ActionLogService;
+use Bclfp\Skeleton\Util\ExceptionCode;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
