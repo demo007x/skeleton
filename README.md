@@ -73,6 +73,11 @@ SIMPLE_JWT_SECRET=
 
 导入 `/storage/databases/` 下面的所有 sql 文件
 
+#### 或者使用安装命令初始化数据库
+```
+    php bin/hyperf sys:install 
+```
+
 #### 启动项目
 
 ```
@@ -98,13 +103,13 @@ php bin/hyperf.php start
 
 ### 如果你觉得这个项目帮助到了你，你可以帮作者买一杯果汁表示鼓励 🍹
 
-![alipay](./public/screenshot/alipay.png)
-![alipay](./public/screenshot/wechat_pay.png)
+![alipay](./screenshot/alipay.png)
+![alipay](./screenshot/wechat_pay.png)
 
 ### QQ 交流： 1031212459
 
 ### 微信交流：加我请备注说明
 
-![wechat](./public/screenshot/friends.png)
+![wechat](./screenshot/friends.png)
 
 Copyright (c) 2020-anziguoer
