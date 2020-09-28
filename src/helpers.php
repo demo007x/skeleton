@@ -99,7 +99,9 @@ if (!function_exists('adminAuth')) {
 if (!function_exists('trees')) {
     /**
      * 将菜单遍历为树形式.
+     * @param array $lists
      * @param int $pid
+     * @return array
      */
     function trees(array $lists, $pid = 0): array
     {

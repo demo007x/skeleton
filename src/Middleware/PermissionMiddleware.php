@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Bclfp\Skeleton\Middleware;
 
 use Bclfp\Skeleton\Event\ActionLog;
-use Bclfp\Skeleton\Service\ActionLogService;
 use Bclfp\Skeleton\Util\ExceptionCode;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;

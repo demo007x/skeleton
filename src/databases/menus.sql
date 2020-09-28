@@ -2,8 +2,7 @@
 drop table if exists menus;
 create table menus
 (
-    id         int auto_increment
-        primary key,
+    id         int(10) not null auto_increment primary key,
     pid        int unsigned     default '0'               not null comment '父级菜单id',
     name       varchar(100)     default ''                not null,
     title      varchar(100)     default ''                not null comment '菜单名称',
@@ -15,8 +14,7 @@ create table menus
     created_at timestamp        default CURRENT_TIMESTAMP not null,
     updated_at timestamp        default CURRENT_TIMESTAMP not null,
     deleted_at timestamp                                  null
-)
-    comment '菜单表';
+) comment '菜单表';
 
 INSERT INTO menus (id, pid, name, title, icon, path, component, is_cache, sort, created_at, updated_at, deleted_at) VALUES (3, 0, 'SystemManager', '系统管理', 'el-icon-setting', 'systemManager', 'Layout', 0, 1, '2020-08-27 08:22:21', '2020-08-30 11:06:52', null);
 INSERT INTO menus (id, pid, name, title, icon, path, component, is_cache, sort, created_at, updated_at, deleted_at) VALUES (4, 3, 'Administrator', '后台用户管理', 'people', 'administrator', 'systemManager/administrator', 1, 4, '2020-08-27 08:23:04', '2020-08-31 21:55:24', null);
