@@ -21,9 +21,10 @@ use Hyperf\Validation\Rule;
 use Bclfp\Skeleton\Middleware\AdminAuthMiddleware;
 use Bclfp\Skeleton\Middleware\PermissionMiddleware;
 
+// @Controller(prefix="/backend/category")
+
 /**
  * Class CategoryController
- * @Controller(prefix="/backend/category")
  * @Middlewares({
  *    @Middleware(AdminAuthMiddleware::class),
  *    @Middleware(PermissionMiddleware::class),
